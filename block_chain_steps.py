@@ -42,6 +42,10 @@ class BlockChainSteps(object):
         return (timestamp - genesis_block_timestamp) // average_diff
 
     def search_nearest_timestamp(self, timestamp: int) -> int:
+        genesis_block_timestamp = self.get_block_timestamp(0)
+        if timestamp < genesis_block_timestamp:
+            return -1
+
         last_block_index = self.get_last_block_index()
         approx_nearest_block = self.calculate_approximate_nearest_block(timestamp)
 
